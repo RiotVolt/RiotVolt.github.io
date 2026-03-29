@@ -3,33 +3,392 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RiotVolt</title>
+  <title>RiotVolt ⚡ - Developer & Student</title>
+  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: url("https://riotvolt.com/background.jpg") no-repeat center center;
+      background-size: cover;
+      color: white;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Dark Overlay for better contrast */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75); /* Darker for better pop */
+      z-index: 0;
+    }
+
+    /* 1. FIX: Fixed "Projects" Link Top-Right 
+      Links to riotvolt.com/projects in a new tab.
+    */
+    .nav-projects {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 8px;
+      color: #00f7ff;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      z-index: 100;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-projects:hover {
+      background: rgba(0, 247, 255, 0.1);
+      border-color: #00f7ff;
+      box-shadow: 0 0 20px rgba(0, 247, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* Main content container for scrolling */
+    .main-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px;
+    }
+
+    /* 2. FIXED AVATAR & IMPROVED CARD 
+      Uses a specific image source, alt text, and enhanced styles.
+      Also includes the cool 3D tilt effect on hover.
+    */
+    .profile-card-container {
+      width: 100%;
+      height: calc(100vh - 120px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 80px; /* Space for the next section */
+      perspective: 1000px; /* For 3D tilt effect */
+    }
+
+    .card {
+      padding: 50px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      transition: all 0.1s ease; /* Faster response for 3D tilt */
+      transform-style: preserve-3d;
+      opacity: 0;
+      animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 20px rgba(0, 247, 255, 0.2);
+      transition: all 0.4s ease;
+    }
+
+    .card:hover .avatar {
+      border-color: #00f7ff;
+      box-shadow: 0 0 30px rgba(0, 247, 255, 0.6);
+      transform: scale(1.05) translateZ(20px);
+    }
+
+    .glow-text {
+      font-size: 2.6rem;
+      margin-bottom: 5px;
+      background: linear-gradient(to right, #fff, #00f7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
+    }
+
+    .subtitle {
+      opacity: 0.7;
+      margin-bottom: 30px;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .buttons a {
+      display: inline-block;
+      margin: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+    }
+
+    .buttons a:hover {
+      background: rgba(0, 247, 255, 0.1);
+      border-color: #00f7ff;
+      box-shadow: 0 0 20px rgba(0, 247, 255, 0.4);
+      transform: translateY(-3px);
+    }
+
+    /* 3. NEW PC SPECS SECTION 
+      Replicates layout from your screenshot, visible upon scrolling.
+    */
+    .specs-section {
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .specs-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      position: relative;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .spec-item {
+      text-align: center;
+      color: white;
+    }
+
+    .spec-item i {
+      font-size: 2.5rem;
+      color: #00f7ff;
+      margin-bottom: 15px;
+      text-shadow: 0 0 15px rgba(0, 247, 255, 0.4);
+    }
+
+    .spec-item h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .spec-item p {
+      font-size: 0.95rem;
+      opacity: 0.8;
+      line-height: 1.5;
+    }
+
+    .storage-list {
+      margin-top: 5px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .storage-list p {
+      opacity: 0.7;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0, 247, 255, 0.2);
+    }
+
+    /* 4. NEW STYLED FOOTER 
+      Replicates your 2nd screenshot with precise text.
+      Fixed small transparent box look.
+    */
+    .site-footer {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      border-radius: 8px;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      opacity: 0.7;
+    }
+
+    .footer-content {
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.8);
+      letter-spacing: 0.5px;
+    }
+
+    .footer-content .heart {
+      color: #ff3366;
+      margin: 0 2px;
+    }
+
+    .footer-content a {
+      color: #00f7ff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-content a:hover {
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+    }
+
+    /* KEYFRAMES FOR ENTRANCE */
+    @keyframes slideUpFade {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <div class="container">
-    <div class="card" id="tilt-card">
-      
-      <img src="avatar.jpeg" class="avatar" alt="RiotVolt Profile Avatar">
+  <a href="https://riotvolt.com/projects" target="_blank" class="nav-projects">Projects</a>
 
-      <h1 class="glow-text">RiotVolt ⚡</h1>
-      <p class="subtitle">Student • Developer</p>
+  <div class="main-wrapper">
+    
+    <div class="profile-card-container">
+      <div class="card" id="tilt-card">
+        
+        <img src="https://riotvolt.com/avatar.jpeg" alt="RiotVolt Profile Avatar" class="avatar">
 
-      <div class="buttons">
-        <a href="https://github.com/RiotVolt" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://x.com/RiotVolt" target="_blank" rel="noopener">Twitter</a>
-        <a href="mailto:contact@riotvolt.com">Email</a>
+        <h1 class="glow-text">RiotVolt ⚡</h1>
+        <p class="subtitle">Student • Developer</p>
+
+        <div class="buttons">
+          <a href="https://github.com/RiotVolt" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://x.com/RiotVolt" target="_blank" rel="noopener">Twitter</a>
+          <a href="mailto:contact@riotvolt.com">Email</a>
+        </div>
+
       </div>
-
     </div>
-  </div>
 
-  <footer>
-    © <span id="year"></span> RiotVolt
+    <section class="specs-section">
+      <h2 class="glow-text">PC Specs</h2>
+      <div class="specs-grid">
+        
+        <div class="spec-item">
+          <i class="fas fa-laptop-code"></i>
+          <h3>OS</h3>
+          <p>Arch Linux with Hyprland</p>
+        </div>
+
+        <div class="spec-item">
+          <i class="fas fa-microchip"></i>
+          <h3>CPU</h3>
+          <p>AMD Ryzen 7 2700 Eight-Core Processor @ 3.20 GHz</p>
+        </div>
+
+        <div class="spec-item">
+          <i class="fas fa-memory"></i>
+          <h3>RAM</h3>
+          <p>32 GB</p>
+        </div>
+
+        <div class="spec-item">
+          <i class="fas fa-display"></i>
+          <h3>GPU</h3>
+          <p>NVIDIA GeForce RTX 3060 Ti</p>
+        </div>
+
+        <div class="spec-item">
+          <i class="fas fa-server"></i>
+          <h3>Storage</h3>
+          <div class="storage-list">
+            <p>PNY CS900 960GB</p>
+            <p>Samsung SSD 870 QVO 1TB</p>
+            <p>Predator SSD GM7000 1TB</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div> <footer class="site-footer">
+    <div class="footer-content">
+      <p>Made with <span class="heart">❤️</span></p>
+      <p>&copy; 2026 Tenshii. All rights reserved. Source code available on <a href="https://github.com/RiotVolt" target="_blank">GitHub</a>.</p>
+    </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // --- Cool 3D Hover Tilt Effect ---
+    // Applying to the main card for that interactive feel.
+    const card = document.getElementById("tilt-card");
+
+    card.addEventListener("mousemove", (e) => {
+      // Get dimensions of the card
+      const rect = card.getBoundingClientRect();
+      
+      // Calculate mouse position relative to the center of the card
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      // Calculate rotation (tweak the '20' to make it more or less extreme)
+      const rotateX = -(y / rect.height) * 20; 
+      const rotateY = (x / rect.width) * 20;
+
+      // Apply the transform
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      card.style.transition = "none"; // Remove transition while moving for instant response
+    });
+
+    // Reset the card to original position when mouse leaves
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+      card.style.transition = "transform 0.5s ease"; // Smooth snap back to center
+    });
+  </script>
 </body>
 </html>
