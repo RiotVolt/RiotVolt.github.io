@@ -1,89 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>RiotVolt</title>
+<title>RiotVolt</title>
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <!-- Your CSS -->
-  <link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- NAV -->
-  <div class="nav">
-    <a href="#home">Home</a>
-    <a href="#projects">Projects</a>
-    <a href="#setup">Setup</a>
+<!-- NAV -->
+<div class="nav">
+  <a href="#home">Home</a>
+  <a href="#projects">Projects</a>
+  <a href="#about">About</a>
+</div>
+
+<!-- HERO -->
+<section id="home" class="hero">
+
+  <h1 class="logo">RiotVolt ⚡</h1>
+  <p class="tagline">Minimal • Futuristic • Developer</p>
+
+  <div class="buttons">
+    <a href="https://github.com/RiotVolt" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://x.com/RiotVolt" target="_blank" rel="noopener">Twitter</a>
+    <a href="mailto:contact@riotvolt.com">Email</a>
   </div>
 
-  <!-- HOME -->
-  <section id="home">
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+
+  <div class="grid">
+
     <div class="card">
-
-      <!-- LEFT -->
-      <div>
-        <h1>RiotVolt</h1>
-        <p class="subtitle">Student • Developer</p>
-        <p class="desc">contact@riotvolt.com</p>
-
-        <div class="links">
-          <a href="https://github.com/RiotVolt" target="_blank">🐙 GitHub</a>
-          <a href="https://x.com/RiotVolt" target="_blank">𝕏 Twitter</a>
-          <a href="mailto:contact@riotvolt.com">✉️ Email</a>
-        </div>
-      </div>
-
-      <!-- RIGHT -->
-      <div style="display:flex; justify-content:center; align-items:center;">
-        <img src="avatar.jpg" class="futuristic-avatar"/>
-      </div>
-
+      <h3>Project One</h3>
+      <p>Coming soon. Something cool will be here.</p>
     </div>
-  </section>
 
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="card" style="grid-template-columns:1fr;">
-      <div>
-        <h2>Projects</h2>
-        <ul>
-          <li><strong>Project 1</strong> – coming soon</li>
-          <li><strong>Project 2</strong> – coming soon</li>
-          <li><strong>Project 3</strong> – coming soon</li>
-        </ul>
-      </div>
+    <div class="card">
+      <h3>Project Two</h3>
+      <p>Another project preview placeholder.</p>
     </div>
-  </section>
 
-  <!-- SETUP -->
-  <section id="setup">
-    <div class="card" style="grid-template-columns:1fr;">
-      <div>
-        <h2>PC Specs</h2>
-        <ul>
-          <li><strong>CPU:</strong> Ryzen 7 5800X</li>
-          <li><strong>RAM:</strong> 32GB</li>
-          <li><strong>GPU:</strong> RTX 3070 Ti</li>
-          <li><strong>Storage:</strong> 2TB</li>
-        </ul>
-      </div>
+    <div class="card">
+      <h3>Project Three</h3>
+      <p>Future idea / experiment.</p>
     </div>
-  </section>
 
-  <!-- FOOTER -->
-  <div class="footer">
-    <p>Made with ᗜˬᗜ</p>
-    <p>© <span id="year"></span> RiotVolt. All rights reserved.</p>
   </div>
 
-  <!-- Your JS -->
-  <script src="script.js"></script>
+</section>
 
+<!-- ABOUT -->
+<section id="about">
+
+  <div class="card single">
+    <h2>About</h2>
+    <p>
+      I'm RiotVolt, a student and developer interested in building clean,
+      minimal and futuristic interfaces.
+    </p>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© <span id="year"></span> RiotVolt</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
