@@ -1,28 +1,234 @@
-// Keep your existing footer logic
-document.getElementById("year").textContent = new Date().getFullYear();
+:root {
+  --bg-color: #09090b;
+  --card-bg: rgba(20, 20, 25, 0.65);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --purple-light: #d8b4fe;
+  --purple-main: #c084fc;
+  --purple-glow: rgba(192, 132, 252, 0.3);
+  --text-main: #f4f4f5;
+  --text-muted: #a1a1aa;
+}
 
-// --- NEW: Cool 3D Hover Tilt Effect ---
-const card = document.getElementById("tilt-card");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
 
-card.addEventListener("mousemove", (e) => {
-  // Get dimensions of the card
-  const rect = card.getBoundingClientRect();
+body {
+  min-height: 100vh;
+  background: var(--bg-color) url("https://riotvolt.com/background.jpg") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* Dark overlay for readability against the background image */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(9, 9, 11, 0.85); 
+  z-index: -1;
+}
+
+/* Symmetrical Main Container */
+.main-wrapper {
+  width: 100%;
+  max-width: 600px; /* Constrains width for a neat, centered look on PC */
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Shared Card Styles */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 40px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.3s ease;
+  width: 100%;
+}
+
+.card:hover {
+  border-color: rgba(192, 132, 252, 0.25);
+}
+
+/* --- Profile Card --- */
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transform-style: preserve-3d;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--purple-main);
+  box-shadow: 0 0 20px var(--purple-glow);
+  margin-bottom: 20px;
+}
+
+.name-title h1 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+
+.name-title p {
+  color: var(--purple-light);
+  font-weight: 500;
+  font-size: 1rem;
+  margin-top: 6px;
+  margin-bottom: 24px;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap; /* Allows wrapping on very small screens */
+  width: 100%;
+}
+
+.buttons a {
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border);
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.buttons a:hover {
+  background: var(--purple-main);
+  border-color: var(--purple-main);
+  color: #000;
+  box-shadow: 0 0 15px var(--purple-glow);
+  transform: translateY(-2px);
+}
+
+/* --- Unified Specs Card --- */
+.specs-title {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--purple-light);
+  margin-bottom: 24px;
+}
+
+.specs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.spec-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.spec-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.spec-label i {
+  color: var(--purple-main);
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.spec-value {
+  text-align: right;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+.sub-text {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* --- Footer --- */
+.site-footer {
+  margin-top: 40px;
+  padding-bottom: 20px;
+}
+
+.footer-content {
+  background: rgba(20, 20, 25, 0.4);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(10px);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.footer-content span {
+  color: var(--purple-main);
+}
+
+/* --- Responsiveness (Mobile & Tablet) --- */
+@media (max-width: 600px) {
+  .card {
+    padding: 30px 20px;
+  }
   
-  // Calculate mouse position relative to the center of the card
-  const x = e.clientX - rect.left - rect.width / 2;
-  const y = e.clientY - rect.top - rect.height / 2;
+  .spec-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 
-  // Calculate rotation (tweak the '20' to make it more or less extreme)
-  const rotateX = -(y / rect.height) * 20; 
-  const rotateY = (x / rect.width) * 20;
+  .spec-value {
+    text-align: left;
+    padding-left: 30px; /* Aligns text with the label, bypassing the icon */
+  }
+}
 
-  // Apply the transform
-  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-  card.style.transition = "none"; // Remove transition while moving for instant response
-});
-
-// Reset the card to original position when mouse leaves
-card.addEventListener("mouseleave", () => {
-  card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
-  card.style.transition = "transform 0.5s ease"; // Smooth snap back to center
-});
+/* Animations */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
